@@ -1,7 +1,7 @@
 // Master Slave JK Flip-Flop:
 module JK_FF(
 	input j, k, clk, clear,
-	output q, qbar;
+	output q, qbar
 );
 	wire clk_bar, clear_bar;
 	wire m1, m2, s1, s2;
