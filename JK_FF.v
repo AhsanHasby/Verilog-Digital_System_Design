@@ -1,24 +1,28 @@
 // Master Slave JK Flip-Flop:
 module JK_FF(
-	input j, k, clk, clear,
+	input j, k, clk, clr,
 	output q, qbar
 );
-	wire clk_bar, clear_bar;
+	wire clk_bar, clr_bar;
 	wire m1, m2, s1, s2;
-	wire q_in, qbar_in;
+	wire q_m, qbar_m, q_s, qbar_s;
 	
 	not (clk_bar, clk);
-	not (clear_bar, clear);
+	not (clr_bar, clr);
 
-	nand (m1, j, qbar_in, clk);
-	nand (m2, k, q_in, clk);
+	nand (m1, j, qbar_m, clk);
+	nand (m2, k, q_m, clk);
+	nand (q_m, m1, qbar_m);
+	nand (qbar_m, m2, q_m);
 
-	nand (s1, m1, clk_bar);
-	nand (s2, m2, clk_bar);
+	nand (s1, q_m, qbar_s, clk_bar);
+	nand (s2, qbar_m, q_s, clk_bar);
+	nand (q_s, s1, qbar_s);
+	nand (qbar_s, s2, q_s);
 
-	nand (q, s1, qbar_in, clear_bar);
-	nand (qbar, s2, q_in, clear_bar);
-	
+	nand (q, q_s, clr_bar);
+	nand (qbar, qbar_s, clr_bar);
+		
 
 endmodule
 
