@@ -1,5 +1,3 @@
-
-
 module BCD_Adder(
 	input [3:0] A, B,
 	input Cin,
