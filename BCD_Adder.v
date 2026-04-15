@@ -19,4 +19,30 @@ module BCD_Adder(
 
 endmodule
 
+module BCD_Adder_TB;
+	reg [3:0] A, B;
+	reg Cin;
+	wire [3:0] Sum;
+	wire Cout;
+	
+	BCD_Adder BA(.A(A), .B(B), .Cin(Cin), .Sum(Sum), .Cout(Cout));
+
+	initial begin
+		$monitor("A = %b, B = %b, Cin = %b | Sum = %b, Cout = %b", A, B, Cin, Sum, Cout);
+		
+		A = 4'b0000; B = 4'b0000; Cin = 0; #100;
+		A = 4'b0001; B = 4'b0001; Cin = 0; #100;
+		A = 4'b0010; B = 4'b0010; Cin = 0; #100;
+		A = 4'b0011; B = 4'b0011; Cin = 0; #100;
+		A = 4'b0100; B = 4'b0100; Cin = 0; #100;
+		A = 4'b0101; B = 4'b0101; Cin = 0; #100;
+		A = 4'b0110; B = 4'b0110; Cin = 0; #100;
+		A = 4'b0111; B = 4'b0111; Cin = 0; #100;
+		A = 4'b1000; B = 4'b1000; Cin = 0; #100;
+		A = 4'b1001; B = 4'b1001; Cin = 0; #100;
+		A = 4'b1001; B = 4'b1001; Cin = 1; #100;
+ 		$finish;
+	end
+
+endmodule
 
